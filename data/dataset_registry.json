@@ -1,0 +1,109 @@
+{
+  "global_ewaste_monitor": {
+    "dataset_name": "Global E-Waste Monitor 2024",
+    "publisher": "UNITAR / ITU / Global E-waste Statistics Partnership",
+    "official_source": "https://ewastemonitor.info/monitors/",
+    "local_path": "data/raw/ewaste/global_ewaste_monitor/",
+    "license": "See publication terms \u2014 contact scycle@unitar.org for bulk data",
+    "note": "No bulk CSV download is publicly available. Data used in this project comes from published report annexes and the ITU DataHub. A curated dataset is embedded in data/synthetic_demo/.",
+    "acquisition_date": null,
+    "status": "manual_download_required",
+    "manual_instructions": "1. Visit https://ewastemonitor.info/monitors/ \n2. Download the PDF report and Annex 2 data tables.\n3. For raw data, email scycle@unitar.org or use the ITU DataHub.\n4. Place extracted CSV/Excel in data/raw/ewaste/global_ewaste_monitor/."
+  },
+  "india_ewaste_cpcb": {
+    "dataset_name": "India Year-wise E-Waste Generated and Recycled (CPCB)",
+    "publisher": "Central Pollution Control Board (CPCB) / data.gov.in",
+    "official_source": "https://www.data.gov.in/resource/year-wise-details-volume-e-waste-generated-and-recycled-under-e-waste-management-rules",
+    "local_path": "data/raw/ewaste/india_ewaste_cpcb/",
+    "license": "National Data Sharing and Accessibility Policy (NDSAP), Government of India",
+    "note": "Requires free registration on data.gov.in to obtain an API key. Data covers national totals; state-level data has separate resource IDs.",
+    "acquisition_date": null,
+    "status": "api_key_required",
+    "manual_instructions": "1. Register at https://data.gov.in and obtain a free API key.\n2. Use the API: https://api.data.gov.in/resource/<resource_id>?api-key=<YOUR_KEY>&format=csv\n3. Resource ID for e-waste generation: check https://www.data.gov.in/resource/year-wise-details-volume-e-waste-generated-and-recycled-under-e-waste-management-rules\n4. Place downloaded CSV in data/raw/ewaste/india_ewaste_cpcb/."
+  },
+  "nasa_battery_aging": {
+    "dataset_name": "NASA Li-ion Battery Aging Datasets (PCoE)",
+    "publisher": "NASA Ames Research Center \u2014 Prognostics Center of Excellence",
+    "official_source": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+    "local_path": "data/raw/batteries/nasa_battery/",
+    "license": "NASA Open Source \u2014 public domain",
+    "note": "Data is in MATLAB .mat format. Community-converted CSV versions are available on Kaggle. Do NOT assume laboratory results generalize to all consumer devices.",
+    "acquisition_date": null,
+    "status": "manual_download_required",
+    "manual_instructions": "Option A (official): \n  1. Visit https://data.nasa.gov/dataset/li-ion-battery-aging-datasets\n  2. Download the battery data archive.\n  3. Extract .mat files to data/raw/batteries/nasa_battery/.\n  4. Run: python src/battery_analysis.py --convert-mat\n\nOption B (CSV \u2014 Kaggle community version): \n  Search Kaggle for 'NASA Battery Dataset' and download the CSV version.\n  Place CSVs in data/raw/batteries/nasa_battery/."
+  },
+  "oecd_environmental": {
+    "dataset_name": "OECD Environmental Statistics",
+    "publisher": "Organisation for Economic Co-operation and Development (OECD)",
+    "official_source": "https://data-explorer.oecd.org/s/1nh",
+    "local_path": "data/raw/pollution/oecd_environmental/",
+    "license": "OECD Terms and Conditions",
+    "note": "Use the OECD Data Explorer to select relevant environmental indicators and export CSV.",
+    "acquisition_date": null,
+    "status": "manual_download_required",
+    "manual_instructions": "1. Visit https://data-explorer.oecd.org\n2. Select the 'Environment' domain.\n3. Filter by relevant indicators (e.g., municipal waste, hazardous waste).\n4. Export the filtered dataset as CSV.\n5. Place in data/raw/pollution/oecd_environmental/."
+  },
+  "epa_environmental": {
+    "dataset_name": "US EPA Environmental Data Downloads",
+    "publisher": "US Environmental Protection Agency (EPA)",
+    "official_source": "https://www.epa.gov/enviro/data-downloads",
+    "local_path": "data/raw/pollution/epa_environmental/",
+    "license": "Public domain (US Government works)",
+    "note": "Multiple sub-datasets available. Identify specific dataset before integrating. Do NOT automatically attribute measurements to e-waste processing.",
+    "acquisition_date": null,
+    "status": "manual_download_required"
+  },
+  "epa_water_quality": {
+    "dataset_name": "US EPA Water Quality Data",
+    "publisher": "US Environmental Protection Agency (EPA)",
+    "official_source": "https://www.waterqualitydata.us/",
+    "local_path": "data/raw/water_quality/epa_water_quality/",
+    "license": "Public domain (US Government works)",
+    "note": "Very large dataset. Use the Water Quality Portal query interface to filter by location, date, and analyte before downloading. Do NOT attribute water quality observations to e-waste without evidence.",
+    "acquisition_date": null,
+    "status": "manual_download_required",
+    "manual_instructions": "1. Visit https://www.waterqualitydata.us/\n2. Filter by state, date range, and relevant analytes (e.g., Lead, Cadmium, Mercury, Arsenic).\n3. Download results as CSV.\n4. Place in data/raw/water_quality/epa_water_quality/."
+  },
+  "world_bank_what_a_waste_country": {
+    "dataset_name": "world_bank_what_a_waste_country",
+    "publisher": "World Bank Group",
+    "official_source": "https://datacatalog.worldbank.org/search/dataset/0039597",
+    "local_path": "C:\\Users\\ADITYA KARN\\OneDrive\\Desktop\\predictive analysis project\\ecocircuit-ai\\data\\raw\\waste_management\\worldbank_what_a_waste_country.xlsx",
+    "license": "CC BY 4.0",
+    "note": "General solid waste management \u2014 NOT exclusively e-waste data",
+    "acquisition_date": "2026-10-27T19:55:19.985482+00:00",
+    "status": "available",
+    "records": null,
+    "columns": null,
+    "file_size_mb": 6.93,
+    "md5": "82d8976c6832f6e9c75bd359ce7cca8a"
+  },
+  "world_bank_what_a_waste_city": {
+    "dataset_name": "world_bank_what_a_waste_city",
+    "publisher": "World Bank Group",
+    "official_source": "https://datacatalog.worldbank.org/search/dataset/0039597",
+    "local_path": "C:\\Users\\ADITYA KARN\\OneDrive\\Desktop\\predictive analysis project\\ecocircuit-ai\\data\\raw\\waste_management\\worldbank_what_a_waste_city.xlsx",
+    "license": "CC BY 4.0",
+    "note": "General solid waste management \u2014 NOT exclusively e-waste data",
+    "acquisition_date": "2026-10-27T19:55:24.390023+00:00",
+    "status": "available",
+    "records": null,
+    "columns": null,
+    "file_size_mb": 1.12,
+    "md5": "73459bf276cf40d932824d798f3b217c"
+  },
+  "uci_ai4i_predictive_maintenance": {
+    "dataset_name": "UCI AI4I 2020 Predictive Maintenance",
+    "publisher": "UCI Machine Learning Repository",
+    "official_source": "https://archive.ics.uci.edu/dataset/601",
+    "local_path": "C:\\Users\\ADITYA KARN\\OneDrive\\Desktop\\predictive analysis project\\ecocircuit-ai\\data\\raw\\predictive_maintenance",
+    "license": "CC BY 4.0",
+    "note": "SYNTHETIC industrial maintenance data. Do NOT interpret results as real electronics failure probabilities.",
+    "acquisition_date": "2026-10-27T19:55:26.696832+00:00",
+    "status": "available",
+    "records": 10000,
+    "columns": 14,
+    "file_size_mb": 0.5,
+    "md5": "f310bae04e9e66c45a63e18c3952fe7e"
+  }
+}

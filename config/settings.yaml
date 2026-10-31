@@ -1,0 +1,51 @@
+# EcoCircuit AI — Application Configuration
+
+app:
+  name: "EcoCircuit AI"
+  tagline: "Predict Pollution. Optimize Production. Eliminate Avoidable E-Waste."
+  version: "1.0.0"
+  debug: false
+
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  synthetic_dir: "data/synthetic_demo"
+  registry_path: "data/dataset_registry.json"
+  max_download_size_mb: 200
+
+models:
+  save_dir: "models"
+  forecast_horizon: 5        # years ahead for e-waste forecasting
+  min_train_years: 5         # minimum annual observations for time-series model
+  battery_rul_threshold: 0.8 # capacity retention below which battery is "end of life"
+
+download:
+  timeout_seconds: 60
+  retry_attempts: 3
+
+logging:
+  level: "INFO"
+  file: "ecocircuit.log"
+
+dashboard:
+  page_title: "EcoCircuit AI"
+  layout: "wide"
+  theme: "dark"
+
+# Dataset download URLs (verified October 2026)
+datasets:
+  world_bank_what_a_waste_country:
+    url: "https://datacatalogfiles.worldbank.org/ddh-published/0039597/DR0095901/What_a_Waste_3.0_COUNTRY_Dataset_&_Codebook.xlsx"
+    local_path: "data/raw/waste_management/worldbank_what_a_waste_country.xlsx"
+    license: "CC BY 4.0"
+
+  world_bank_what_a_waste_city:
+    url: "https://datacatalogfiles.worldbank.org/ddh-published/0039597/DR0095900/What_a_Waste_3.0_CITY_Dataset_&_Codebook.xlsx"
+    local_path: "data/raw/waste_management/worldbank_what_a_waste_city.xlsx"
+    license: "CC BY 4.0"
+
+  uci_ai4i_predictive_maintenance:
+    url: "https://archive.ics.uci.edu/static/public/601/ai4i+2020+predictive+maintenance+dataset.zip"
+    local_path: "data/raw/predictive_maintenance/ai4i_2020.zip"
+    license: "CC BY 4.0"
+    note: "Synthetic industrial maintenance data — NOT real electronics failure data"
