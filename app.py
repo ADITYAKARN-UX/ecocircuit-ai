@@ -1360,24 +1360,34 @@ def page_circular(data: Dict[str, pd.DataFrame]):
 
         with col_ad2:
             st.markdown("##### Recommended Action")
-            from src.recycling_recommender import recommend
-            rec = recommend(
+            from src.recycling_recommender import recommend, ProductInput
+            _condition_map = {
+                "Fully Functional": "good",
+                "Minor Defects":    "fair",
+                "Non-Functional / Dead": "non-functional",
+            }
+            _lifespan_map = {
+                "Smartphone": 4, "Laptop": 5, "Desktop Computer": 6,
+                "Tablet": 4, "Monitor": 7, "Refrigerator": 15,
+                "Server": 8, "Charger": 3,
+            }
+            rec = recommend(ProductInput(
                 product_category=prod_cat,
                 age_years=float(age_years),
-                condition="Functional with minor issues" if is_functional == "Minor Defects" else ("Good / Functional" if is_functional == "Fully Functional" else "Non-functional"),
-                is_functional=(is_functional != "Non-Functional / Dead"),
+                condition=_condition_map.get(is_functional, "fair"),
+                expected_lifespan_years=_lifespan_map.get(prod_cat, 5),
                 repair_cost_estimate=float(repair_cost),
-                replacement_value=float(replacement_val),
-            )
+                replacement_cost=float(replacement_val),
+            ))
 
             st.markdown(
                 f"""
                 <div style="background:#FFFFFF; border:1px solid #E1E6DE; border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(32,41,35,0.02);">
                     <div style="font-size:0.75rem; text-transform:uppercase; color:#68736B; font-weight:600;">Recommended Protocol</div>
-                    <div style="font-family:'Manrope',sans-serif; font-size:1.6rem; font-weight:800; color:#245C43; margin:6px 0;">{rec['action']}</div>
-                    <div style="font-size:0.85rem; color:#68736B; margin-bottom:12px;">Decision Confidence: <strong>{rec['confidence']}</strong> (Rule-based expert logic)</div>
+                    <div style="font-family:'Manrope',sans-serif; font-size:1.6rem; font-weight:800; color:#245C43; margin:6px 0;">{rec.action}</div>
+                    <div style="font-size:0.85rem; color:#68736B; margin-bottom:12px;">Decision Confidence: <strong>{rec.confidence}</strong> (Rule-based expert logic)</div>
                     <div style="background:#EEF1EA; border-radius:8px; padding:12px; font-size:0.82rem; line-height:1.5; color:#202923;">
-                        <strong>Operational Rationale:</strong> {rec['reasoning']}
+                        <strong>Operational Rationale:</strong> {rec.reasoning}
                     </div>
                 </div>
                 """,
