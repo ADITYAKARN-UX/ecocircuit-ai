@@ -1404,23 +1404,29 @@ def page_circular(data: Dict[str, pd.DataFrame]):
         with s_col3:
             eff_rate = st.slider("Material Recovery Efficiency (%)", 30, 95, 75, step=5) / 100.0
 
-        from src.what_if_simulator import simulate_scenario
-        sim_res = simulate_scenario(
-            scenario_name="Custom Simulation",
+        from src.what_if_simulator import simulate_scenario, ScenarioConfig
+        _sim_cfg = ScenarioConfig(
+            name="Custom Simulation",
+            production_volume=1_000_000,
+            product_category="Smartphone",
             collection_rate=col_rate,
             reuse_rate=reuse_rate,
             recycling_efficiency=eff_rate,
-            production_volume=1000000,
-            product_category="Smartphone",
         )
+        sim_res = simulate_scenario(_sim_cfg)
+
+        # Derive display values from ScenarioResult attributes
+        _ewaste_avoided_t = max(0.0, (1_000_000 - sim_res.ewaste_generated_kg) / 1000)
+        _co2e_avoided_t   = sim_res.co2e_avoided_kg / 1000
+        _recovered_value  = sim_res.recycled_units * 70 * 0.15  # ~15% of $70 avg value
 
         sim1, sim2, sim3 = st.columns(3)
         with sim1:
-            st.metric("Avoided E-Waste", f"{sim_res['ewaste_avoided_tonnes']:,.1f} Tonnes")
+            st.metric("Avoided E-Waste", f"{_ewaste_avoided_t:,.1f} Tonnes")
         with sim2:
-            st.metric("Recovered Economic Value", f"${sim_res['recovered_value_usd']:,.0f}")
+            st.metric("Recovered Economic Value", f"${_recovered_value:,.0f}")
         with sim3:
-            st.metric("Avoided Lifecycle CO₂e", f"{sim_res['co2e_avoided_tonnes']:,.1f} Tonnes")
+            st.metric("Avoided Lifecycle CO₂e", f"{_co2e_avoided_t:,.1f} Tonnes")
 
         st.caption("Estimates calculated using peer-reviewed lifecycle assessment factors (UNEP / GEM supplementary papers).")
 
